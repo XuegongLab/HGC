@@ -1,0 +1,7 @@
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
+useDynLib(HGC, .registration = TRUE)
+
+# Just open the R-based functions
+export(HGC.paris)
+export(HGC.time)

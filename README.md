@@ -1,4 +1,4 @@
-# HGC: A graph-based hierarchical clustering algorithm
+# HGC: fast hierarchical clustering for large-scale single-cell data 
 
 
 ## Introduction

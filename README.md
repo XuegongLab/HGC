@@ -19,7 +19,8 @@
 To install the *developmental version* from [**GitHub**](https://github.com/stevenhuakui/HGC/):
 
 ```{r Installation from GitHub, eval = FALSE}
-if(!require(devtools)) install.packages("devtools")
+if(!require(devtools))
+  install.packages("devtools")
 devtools::install_github("stevenhuakui/HGC", build_vignettes = TRUE)
 ```
 
@@ -84,12 +85,12 @@ DemoData.seuratobj <- FindClusteringTree(object = DemoData.seuratobj,
 
 ### With inputs from different scRNA-seq pipelines
 
-There are many popular scRNA-seq pipelines building and utilizing graphs during the analysis. We try to collect and organize a guide to apply HGC in the exisiting graphs in the pipelines. The guide is stored in [**GitHub**](https://github.com/stevenhuakui/HGC_plot), as "Loading_Different_Graphs.ipynb".
+There are many popular scRNA-seq pipelines building and utilizing graphs during the analysis. We try to collect and organize a guide to apply **`HGC`** in the exisiting graphs in the pipelines. The guide is stored in [**GitHub**](https://github.com/stevenhuakui/HGC_plot), as "Loading_Different_Graphs.ipynb".
 
 
 ## Output
 
-The clustering tree by HGC is stored as `hclust` object supported by the R package `stats`. The detailed description is in the help pages of `HGC.paris` or `hclust`.
+The clustering tree by **`HGC`** is stored as `hclust` object supported by the R package `stats`. The detailed description is in the help pages of `HGC.paris` or `hclust`.
 
 
 ## Visualization of results

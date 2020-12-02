@@ -34,10 +34,11 @@ The `HGC` package needs the support of CPP11. Please check your system environme
 
 ## Input
 
-**`HGC`** takes one inputs: the graph `G`.
+**`HGC`** takes one input: the graph `G`.
 
 The input `G` is the adjacency matrix of the graph. It should be stored as the dgCMatrix supported by the R package `Matrix`. The row names and column names of the matrix are both the nodes' names, that are the cells' names for scRNA-seq data. The element of `G` are the weights of edges in the graph. Zeros in `G` mean no link between the correspoding nodes.
 
+The **`HGC`** could also run under the `Seurat` pipeline. Here the input is the `Seurat` object containing the graph.
 
 ## Usage
 
@@ -53,6 +54,32 @@ G = G + t(G)
 G = as(G, "dgCMatrix")
 tree = HGC.paris(G)
 record = HGC.time(G)
+```
+
+### With Seurat object input
+
+For the analysis under the `Seurat` pipeline, we could utilize `FindClusteringTree`:
+
+```{r demo2, eval = FALSE}
+# Use DemoData to represent an gene expression matrix
+require(Seurat)
+
+DemoData.seuratobj <- CreateSeuratObject(counts = DemoData,
+                                         min.cells = 20)
+DemoData.seuratobj <- NormalizeData(object = DemoData.seuratobj,
+                                    verbose = F)
+DemoData.seuratobj <- ScaleData(object = DemoData.seuratobj,
+                                features = row.names(DemoData.seuratobj),
+                                verbose = F)
+DemoData.seuratobj <- FindVariableFeatures(object = DemoData.seuratobj,
+                                           nfeatures = 2000, verbose = F)
+DemoData.seuratobj <- RunPCA(object = DemoData.seuratobj,
+                             npcs = 100, verbose = F)
+DemoData.seuratobj <- FindNeighbors(object = DemoData.seuratobj,
+                                    nn.eps = 0.5, k.param = 30,
+                                    dims = 1:25, verbose = F)
+DemoData.seuratobj <- FindClusteringTree(object = DemoData.seuratobj,
+                                         graph.type = "SNN")
 ```
 
 ### With inputs from different scRNA-seq pipelines
@@ -81,6 +108,11 @@ The detailed codes for plotting are stored in [**GitHub**](https://github.com/st
 ## Help
 
 Use the following code in R to get access to the help documentation for **`HGC`**:
+
+```{r help3, eval = FALSE}
+# Documentation for HGC
+?FindClusteringTree
+```
 
 ```{r help1, eval = FALSE}
 # Documentation for HGC

@@ -85,7 +85,7 @@ DemoData.seuratobj <- FindClusteringTree(object = DemoData.seuratobj,
 
 ### With inputs from different scRNA-seq pipelines
 
-There are many popular scRNA-seq pipelines building and utilizing graphs during the analysis. We try to collect and organize a guide to apply **`HGC`** in the exisiting graphs in the pipelines. The guide is stored in [**GitHub**](https://github.com/stevenhuakui/HGC_plot), as "Loading_Different_Graphs.ipynb".
+There are many popular scRNA-seq pipelines building and utilizing graphs during the analysis. We try to collect and organize a guide to apply **`HGC`** in the exisiting graphs in the pipelines. The guide is stored in [**GitHub**](https://github.com/stevenhuakui/HGC/tree/master/HGC_plotting_guide), as "Loading_Different_Graphs.ipynb".
 
 
 ## Output
@@ -103,7 +103,7 @@ We collect many exisiting methods to visualize the clustering trees in R. There 
     <td><img src="https://github.com/stevenhuakui/HGC/blob/master/figures/fig3.png" width="256"/>
 </tr></table>
 
-The detailed codes for plotting are stored in [**GitHub**](https://github.com/stevenhuakui/HGC_plot), as "Plotting_Dendrogram_And_Low_Dimension_Visualization.ipynb".
+The detailed codes for plotting are stored in [**GitHub**](https://github.com/stevenhuakui/HGC/tree/master/HGC_plotting_guide), as "Plotting_Dendrogram_And_Low_Dimension_Visualization.ipynb".
 
 
 ## Help

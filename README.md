@@ -3,7 +3,7 @@
 
 ## Introduction
 
-**`HGC`** is an R package for **HGC: A graph-based hierarchical clustering method for scRNA-seq data**. It could provide hierarchical clustering result for large scale single cell RNA sequencing (scRNA-seq) datasets.
+**`HGC`** is an R package for **HGC: fast hierarchical clustering for large-scale single-cell data**. It could provide hierarchical clustering result for large scale single cell RNA sequencing (scRNA-seq) datasets.
 
 **`HGC`** catch the hierarchical information in the undirected weighted graphs. For scRNA-seq data, the clustering result is based on the shared nearest neighbor (SNN) graphs built in feature spaces. For scRNA-seq data, we organize a pipeline around HGC, and its overview is shown here.
 

@@ -250,6 +250,7 @@ void Graph::merge_node(int node1, int node2, int new_node) {
   del_node(node2);
 }
 
+
 // used to observe the iteration progress
 double Graph::average_edge() {
   int node_num = 0;

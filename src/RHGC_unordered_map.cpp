@@ -1,3 +1,5 @@
+// This part is generally a re-implemention of the paris algorithm (https://github.com/tbonald/paris/blob/master/paris.py)
+
 #include <iostream>
 #include <vector>
 #include <set>

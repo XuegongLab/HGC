@@ -40,7 +40,7 @@ The `HGC` package needs the support of CPP11. Please check your system environme
 
 The core function of **`HGC`** takes a graph `G` as the input. Here `G` is the adjacency matrix of a graph of cells, where the element in `G` are the weights of edges in the graph, and zero means no link between the corresponding node pairs. `G` should be a dgCMatrix supported by the R package `Matrix`.
 
-**`HGC`** could be seamleslly used in the popular `Seurat` pipeline. It also accepts self-build graphs or cell graph from other scRNA-seq pipelines. Here are some examples of the usage.
+**`HGC`** could be seamlessly used in the popular `Seurat` pipeline. It also accepts self-build graphs or cell graph from other scRNA-seq pipelines. Here are some examples of the usage.
 
 ### With Seurat object as input
 

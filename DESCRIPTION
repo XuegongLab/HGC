@@ -1,13 +1,13 @@
 Package: HGC
 Type: Package
-Title: A graph-based hierarchical clustering algorithm
-Version: 0.1.1
+Title: A fast hierarchical graph-based clustering method
+Version: 1.0.0
 Author: Zou Ziheng, Xiao Xiao, Hua Kui*
 Maintainer: Zou Ziheng <zouzh14@gmail.com>
 Description: HGC provides a efficient tool to run hierarchical clustering in large-scale scRNA-seq datasets.
 License: 3-clause BSD license.
 Encoding: UTF-8
 LazyData: true
-Imports: Rcpp (>= 1.0.0), RcppEigen(>= 0.3.2.0), Matrix(>= 1.2-0)
+Imports: Rcpp (>= 1.0.0), RcppEigen(>= 0.3.2.0), Matrix(>= 1.2-0), dynamicTreeCut, dendextend
 LinkingTo: Rcpp, RcppEigen
 RoxygenNote: 7.1.1

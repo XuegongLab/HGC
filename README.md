@@ -7,7 +7,7 @@
 
 The basic idea of **`HGC`** is to perform hierarchical clustering on the shared nearest neighbor (SNN) graphs of cells. The overview of HGC is shown as follows.
 
-![overview](https://github.com/stevenhuakui/HGC/blob/master/figures/overview.png)
+![overview](https://github.com/stevenhuakui/HGC/blob/master/figures/overview2.png)
 
 [//]: #  (## Citation)
 

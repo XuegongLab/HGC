@@ -1,0 +1,9 @@
+# latex
+*.aux
+*.bbl
+*.blg
+*.log
+*.synctex.gz
+*.toc
+
+*.git

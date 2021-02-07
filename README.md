@@ -3,9 +3,9 @@
 
 ## Introduction
 
-**`HGC`** is an R package for **HGC: A graph-based hierarchical clustering method for scRNA-seq data**. It could provide hierarchical clustering result for large scale single cell RNA sequencing (scRNA-seq) datasets.
+**`HGC`** is an R package for conducting fast hierarchical clustering on large-scale single-cell RNA sequencing (scRNA-seq) datasets.
 
-**`HGC`** catch the hierarchical information in the undirected weighted graphs. For scRNA-seq data, the clustering result is based on the shared nearest neighbor (SNN) graphs built in feature spaces. For scRNA-seq data, we organize a pipeline around HGC, and its overview is shown here.
+The basic idea of **`HGC`** is to perform hierarchical clustering on the shared nearest neighbor (SNN) graphs of cells. The overview of HGC is shown as follows.
 
 ![overview](https://github.com/stevenhuakui/HGC/blob/master/figures/overview.png)
 
@@ -33,33 +33,18 @@ library(HGC)
 The `HGC` package needs the support of CPP11. Please check your system environment.
 
 
-## Input
 
-**`HGC`** takes one input: the graph `G`.
 
-The input `G` is the adjacency matrix of the graph. It should be stored as the dgCMatrix supported by the R package `Matrix`. The row names and column names of the matrix are both the nodes' names, that are the cells' names for scRNA-seq data. The element of `G` are the weights of edges in the graph. Zeros in `G` mean no link between the correspoding nodes.
-
-The **`HGC`** could also run under the `Seurat` pipeline. Here the input is the `Seurat` object containing the graph.
 
 ## Usage
 
-### With dgCMatrix input
+The core function of **`HGC`** takes a graph `G` as the input. Here `G` is the adjacency matrix of a graph of cells, where the element in `G` are the weights of edges in the graph, and zero means no link between the corresponding node pairs. `G` should be a dgCMatrix supported by the R package `Matrix`.
 
-Here is an example to run **`HGC`** with random input:
+**`HGC`** could be seamlessly used in the popular `Seurat` pipeline. It also accepts self-build graphs or cell graph from other scRNA-seq pipelines. Here are some examples of the usage.
 
-```{r demo1, eval = FALSE}
-require(Matrix)
+### With Seurat object as input
 
-G = matrix(1:25,5,5)
-G = G + t(G)
-G = as(G, "dgCMatrix")
-tree = HGC.paris(G)
-record = HGC.time(G)
-```
-
-### With Seurat object input
-
-For the analysis under the `Seurat` pipeline, we could utilize `FindClusteringTree`:
+For analysis in `Seurat` pipeline, use the `FindClusteringTree` function:
 
 ```{r demo2, eval = FALSE}
 # Use DemoData to represent an gene expression matrix
@@ -83,19 +68,35 @@ DemoData.seuratobj <- FindClusteringTree(object = DemoData.seuratobj,
                                          graph.type = "SNN")
 ```
 
-### With inputs from different scRNA-seq pipelines
+### With dgCMatrix as input
 
-There are many popular scRNA-seq pipelines building and utilizing graphs during the analysis. We try to collect and organize a guide to apply **`HGC`** in the exisiting graphs in the pipelines. The guide is stored in [**GitHub**](https://github.com/stevenhuakui/HGC/tree/master/HGC_plotting_guide), as "Loading_Different_Graphs.ipynb".
+For other graphs, use the function `HGC.paris`:
+
+```{r demo1, eval = FALSE}
+require(Matrix)
+
+G = matrix(1:25,5,5)
+G = G + t(G)
+G = as(G, "dgCMatrix")
+tree = HGC.paris(G)
+record = HGC.time(G)
+```
+
+
+
+### With graphs from other scRNA-seq pipelines
+
+There are many popular scRNA-seq pipelines building and utilizing graphs in their analysis. We try to collect and organize a guide to apply **`HGC`** in the exisiting graphs in the pipelines. The guide is stored in [**GitHub**](https://github.com/stevenhuakui/HGC/tree/master/HGC_plotting_guide), as "Loading_Different_Graphs.ipynb".
 
 
 ## Output
 
-The clustering tree by **`HGC`** is stored as `hclust` object supported by the R package `stats`. The detailed description is in the help pages of `HGC.paris` or `hclust`.
+The dendrogram given by **`HGC`** is stored as `hclust` object supported by the R package `stats`. The detailed descriptions can be found in the help pages of `HGC.paris` or `hclust`.
 
 
 ## Visualization of results
 
-We collect many exisiting methods to visualize the clustering trees in R. There are some examples.
+We collect many exisiting methods to visualize the clustering trees in R. Here are some examples.
 
 <table><tr>
     <td><img src="https://github.com/stevenhuakui/HGC/blob/master/figures/fig1.png" width="256"/>
@@ -108,7 +109,7 @@ The detailed codes for plotting are stored in [**GitHub**](https://github.com/st
 
 ## Help
 
-Use the following code in R to get access to the help documentation for **`HGC`**:
+Use the following code to get access to the help documentation of **`HGC`**:
 
 ```{r help3, eval = FALSE}
 # Documentation for HGC
@@ -125,4 +126,4 @@ Use the following code in R to get access to the help documentation for **`HGC`*
 ?HGC.time
 ```
 
-You are also welcome to view and post questions in github or contact the author by email for help.
+You are welcome to view and post questions in github or contact the author by email for help.

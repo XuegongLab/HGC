@@ -21,7 +21,7 @@ To install the *developmental version* from [**GitHub**](https://github.com/stev
 ```{r Installation from GitHub, eval = FALSE}
 if(!require(devtools))
   install.packages("devtools")
-devtools::install_github("stevenhuakui/HGC", build_vignettes = TRUE)
+devtools::install_github("stevenhuakui/HGC")
 ```
 
 To load the installed **`HGC`** in R:

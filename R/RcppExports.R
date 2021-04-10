@@ -13,3 +13,19 @@ get_leaves <- function(hglink) {
     .Call(`_HGC_get_leaves`, hglink)
 }
 
+ComputeSNN <- function(nn_ranked, prune) {
+    .Call(`_HGC_ComputeSNN`, nn_ranked, prune)
+}
+
+WriteEdgeFile <- function(snn, filename, display_progress) {
+    invisible(.Call(`_HGC_WriteEdgeFile`, snn, filename, display_progress))
+}
+
+DirectSNNToFile <- function(nn_ranked, prune, display_progress, filename) {
+    .Call(`_HGC_DirectSNNToFile`, nn_ranked, prune, display_progress, filename)
+}
+
+SNN_SmallestNonzero_Dist <- function(snn, mat, n, nearest_dist) {
+    .Call(`_HGC_SNN_SmallestNonzero_Dist`, snn, mat, n, nearest_dist)
+}
+

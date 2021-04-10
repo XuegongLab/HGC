@@ -77,7 +77,12 @@ NumericMatrix HierarCluster_paris(Eigen::SparseMatrix<double> m) {
                 chain.erase(iterc + chain.size() - 1);
                 if (b == c) {
                     // merge a, b
-                    double tempa[4] = { a, b, d, s[a] + s[b] };
+                    double a_double = static_cast<double>(a);
+                    double b_double = static_cast<double>(b);
+                    int s_apb = s[a] + s[b];
+                    double s_apb_double = static_cast<double>(s_apb);
+                    // double tempa[4] = { a, b, d, s[a] + s[b] };
+                    double tempa[4] = { a_double, b_double, d, s_apb_double };
                     NVector tempnv(tempa, tempa + 4);
                     D.push_back(tempnv);
                     // std::cout << "acc: " << tempnv[0] << " b: " << tempnv[1] << " d: " << tempnv[2] << " scc: " << tempnv[3] << "\n";
@@ -130,7 +135,11 @@ NumericMatrix HierarCluster_paris(Eigen::SparseMatrix<double> m) {
             int b = bt[0];
             int t = bt[1];
             s_cc = s_cc + t;
-            double tempa[4] = { a_cc, b, inf, s_cc };
+
+            double a_cc_double = static_cast<double>(a_cc);
+            double b_double = static_cast<double>(b);
+            double s_cc_double = static_cast<double>(s_cc);
+            double tempa[4] = { a_cc_double, b_double, inf, s_cc_double };
             NVector tempnv(tempa, tempa + 4);
             //std::cout << "acc: " << tempnv[0] << " b: " << tempnv[1] << " d: " << tempnv[2] << " scc: " << tempnv[3] << "\n";
             D.push_back(tempnv);

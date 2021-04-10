@@ -39,11 +39,64 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// ComputeSNN
+Eigen::SparseMatrix<double> ComputeSNN(Eigen::MatrixXd nn_ranked, double prune);
+RcppExport SEXP _HGC_ComputeSNN(SEXP nn_rankedSEXP, SEXP pruneSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type nn_ranked(nn_rankedSEXP);
+    Rcpp::traits::input_parameter< double >::type prune(pruneSEXP);
+    rcpp_result_gen = Rcpp::wrap(ComputeSNN(nn_ranked, prune));
+    return rcpp_result_gen;
+END_RCPP
+}
+// WriteEdgeFile
+void WriteEdgeFile(Eigen::SparseMatrix<double> snn, String filename, bool display_progress);
+RcppExport SEXP _HGC_WriteEdgeFile(SEXP snnSEXP, SEXP filenameSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::traits::input_parameter< Eigen::SparseMatrix<double> >::type snn(snnSEXP);
+    Rcpp::traits::input_parameter< String >::type filename(filenameSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    WriteEdgeFile(snn, filename, display_progress);
+    return R_NilValue;
+END_RCPP
+}
+// DirectSNNToFile
+Eigen::SparseMatrix<double> DirectSNNToFile(Eigen::MatrixXd nn_ranked, double prune, bool display_progress, String filename);
+RcppExport SEXP _HGC_DirectSNNToFile(SEXP nn_rankedSEXP, SEXP pruneSEXP, SEXP display_progressSEXP, SEXP filenameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type nn_ranked(nn_rankedSEXP);
+    Rcpp::traits::input_parameter< double >::type prune(pruneSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    Rcpp::traits::input_parameter< String >::type filename(filenameSEXP);
+    rcpp_result_gen = Rcpp::wrap(DirectSNNToFile(nn_ranked, prune, display_progress, filename));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SNN_SmallestNonzero_Dist
+std::vector<double> SNN_SmallestNonzero_Dist(Eigen::SparseMatrix<double> snn, Eigen::MatrixXd mat, int n, std::vector<double> nearest_dist);
+RcppExport SEXP _HGC_SNN_SmallestNonzero_Dist(SEXP snnSEXP, SEXP matSEXP, SEXP nSEXP, SEXP nearest_distSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Eigen::SparseMatrix<double> >::type snn(snnSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type mat(matSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type nearest_dist(nearest_distSEXP);
+    rcpp_result_gen = Rcpp::wrap(SNN_SmallestNonzero_Dist(snn, mat, n, nearest_dist));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_HGC_HierarCluster_paris", (DL_FUNC) &_HGC_HierarCluster_paris, 1},
     {"_HGC_HierarCluster_paris_time", (DL_FUNC) &_HGC_HierarCluster_paris_time, 1},
     {"_HGC_get_leaves", (DL_FUNC) &_HGC_get_leaves, 1},
+    {"_HGC_ComputeSNN", (DL_FUNC) &_HGC_ComputeSNN, 2},
+    {"_HGC_WriteEdgeFile", (DL_FUNC) &_HGC_WriteEdgeFile, 3},
+    {"_HGC_DirectSNNToFile", (DL_FUNC) &_HGC_DirectSNNToFile, 4},
+    {"_HGC_SNN_SmallestNonzero_Dist", (DL_FUNC) &_HGC_SNN_SmallestNonzero_Dist, 4},
     {NULL, NULL, 0}
 };
 

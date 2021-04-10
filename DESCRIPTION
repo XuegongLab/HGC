@@ -1,12 +1,35 @@
 Package: HGC
 Type: Package
 Title: A fast hierarchical graph-based clustering method
-Version: 1.0.0
-Author: Zou Ziheng, Xiao Xiao, Hua Kui*
-Maintainer: Zou Ziheng <zouzh14@gmail.com>
-Description: HGC provides a efficient tool to run hierarchical clustering in large-scale scRNA-seq datasets.
-License: GPL (>= 2)
+Version: 0.99.0
+Authors@R: c(person("Zou", "Ziheng",
+                email = "zouzh14@gmail.com",
+                role=c("aut")),
+             person("Hua", "Kui",
+                role=c("aut")),
+             person("XGlab",
+                email = "xglab@mail.tsinghua.edu.cn",
+                role=c("cre", "cph")))
+Maintainer: XGlab <xglab@mail.tsinghua.edu.cn>
+Description: `HGC` (short for Hierarchical Graph-based Clustering) is a R package for 
+        conducting  hierarchical clustering on large-scale single-cell RNA-seq 
+        (scRNA-seq) data. The key idea is to construct a dendrogram of cells on 
+        their shared nearest neighbor (SNN) graph. `HGC` provides functions for 
+        building cell graphs and for conducting hierarchical clustering on the graph.
+License: GPL-3
 Encoding: UTF-8
-LazyData: true
-Imports: Rcpp (>= 1.0.0), RcppEigen(>= 0.3.2.0), Matrix(>= 1.2-0), dynamicTreeCut, dendextend
+SystemRequirements: C++11
+Depends: R (>= 4.1.0)
+Imports: Rcpp (>= 1.0.0), RcppEigen(>= 0.3.2.0), Matrix, RANN, ape,
+        dendextend, ggplot2, mclust, patchwork, dplyr, grDevices
 LinkingTo: Rcpp, RcppEigen
+Suggests: BiocStyle, rmarkdown, knitr, testthat (>= 3.0.0)
+VignetteBuilder: knitr
+biocViews: SingleCell, Software, Clustering, RNASeq, GraphAndNetwork,
+        DNASeq
+Config/testthat/edition: 3
+NeedsCompilation: yes
+Packaged: 2021-04-09 11:26:01 UTC; zouzh
+Author: Zou Ziheng [aut],
+  Hua Kui [aut],
+  XGlab [cre, cph]

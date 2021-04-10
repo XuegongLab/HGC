@@ -80,7 +80,12 @@ NumericMatrix HierarCluster_paris_time(Eigen::SparseMatrix<double> m) {
         chain.erase(iterc + chain.size() - 1);
         if (b == c) {
           // merge a, b
-          double tempa[4] = { a, b, d, s[a] + s[b] };
+          double a_double = static_cast<double>(a);
+          double b_double = static_cast<double>(b);
+          int s_apb = s[a] + s[b];
+          double s_apb_double = static_cast<double>(s_apb);
+          // double tempa[4] = { a, b, d, s[a] + s[b] };
+          double tempa[4] = { a_double, b_double, d, s_apb_double };
           NVector tempnv(tempa, tempa + 4);
           D.push_back(tempnv);
           // std::cout << "acc: " << tempnv[0] << " b: " << tempnv[1] << " d: " << tempnv[2] << " scc: " << tempnv[3] << "\n";

@@ -42,7 +42,13 @@ NumericMatrix reorder_dendrogram(std::vector<NVector> D){
     int a2 = D[i][1];
     unsigned int a1_abs = abs(a1);
     unsigned int a2_abs = abs(a2);
-    double tempa[4] = { nindex[1][a1_abs], nindex[1][a2_abs],D[i][2], D[i][3] };
+
+    double tempa_ele0 = static_cast<double>(nindex[1][a1_abs]);
+    double tempa_ele1 = static_cast<double>(nindex[1][a2_abs]);
+    double tempa_ele2 = static_cast<double>(D[i][2]);
+    double tempa_ele3 = static_cast<double>(D[i][3]);
+    //double tempa[4] = { nindex[1][a1_abs], nindex[1][a2_abs],D[i][2], D[i][3] };
+    double tempa[4] = { tempa_ele0, tempa_ele1, tempa_ele2, tempa_ele3 };
     NVector tempnv(tempa, tempa + 4);
     mlarge.push_back(tempnv);
   }

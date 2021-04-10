@@ -14,15 +14,7 @@ For more information, please refer to the preprint of `HGC` on
 
 ## Installation
 
-`HGC` could be installed from Bioconductor.
-
-```{r Bioconductor install, eval = FALSE}
-if (!requireNamespace("BiocManager"))
-    install.packages("BiocManager")
-BiocManager::install("HGC")
-```
-
-The users could also get the newest version from Github.
+`HGC` could be installed from Github.
 
 ```{r Github install, eval = FALSE}
 if(!require(devtools))

@@ -19,7 +19,7 @@ For more information, please refer to the preprint of `HGC` on
 ```{r Github install, eval = FALSE}
 if(!require(devtools))
     install.packages("devtools")
-devtools::install_github("stevenhuakui/HGC")
+devtools::install_github("XuegongLab/HGC")
 ```
 
 ## Quick Start

@@ -45,7 +45,7 @@ The users could also get the newest version from Github.
 ```{r Github install, eval = FALSE}
 if(!require(devtools))
     install.packages("devtools")
-devtools::install_github("stevenhuakui/HGC")
+devtools::install_github("XuegongLab/HGC")
 ```
 
 # Quick Start

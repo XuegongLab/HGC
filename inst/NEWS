@@ -1,5 +1,9 @@
 HGC News
 
-SC3 0.99.0 (Release date: 2021-04-04):
+HGC 0.99.0 (Release date: 2021-04-10):
 
     * The first version 0.99.0 is submitted to Bioconductor
+
+HGC 0.99.1 (Release date: 2021-04-18):
+
+    * Remove some abundant files.

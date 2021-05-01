@@ -1,0 +1,10 @@
+*.Rproj
+*.o
+*.s
+.git/
+.Rproj.user/
+*.Rhistory
+*.dll
+.Rbuildignore
+src-i386/
+src-x64/

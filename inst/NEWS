@@ -11,3 +11,8 @@ HGC 0.99.1 (Release date: 2021-04-18):
 HGC 0.99.2 (Release date: 2021-04-20):
 
     * Remove some abundant files.
+
+HGC:HGC4oldRVersion 0.99.2 (Release date: 2021-05-02):
+
+    * The branch could help users with lower R version when the master branch is working for Bioconductor.
+    * Provide HGC.html.

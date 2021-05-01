@@ -1,5 +1,23 @@
-# HGC: fast hierarchical clustering for large-scale single-cell data
-## Introduction
+---
+title: "HGC package manual"
+author: "Zou Ziheng, Kui Hua"
+date: "`r Sys.Date()`"
+output:
+    BiocStyle::html_document:
+        toc: true
+vignette: >
+    %\VignetteIndexEntry{HGC package manual}
+    %\VignetteEngine{knitr::rmarkdown}
+    \usepackage[utf8]{inputenc}
+---
+
+```{r knitr-options, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(fig.align = 'center', 
+                fig.width = 4.5, fig.height = 3, dev = 'png')
+```
+
+# Introduction
 
 `HGC` (short for Hierarchical Graph-based Clustering) is a R package for 
 conducting  hierarchical clustering on large-scale single-cell RNA-seq 
@@ -12,19 +30,27 @@ clustering accuracy and has better scalability to large single-cell data.
 For more information, please refer to the preprint of `HGC` on 
 [bioRxiv](https://doi.org/10.1101/2021.02.07.430106).
 
-## Installation
+# Installation
 
-`HGC` could be installed from Github.
+`HGC` could be installed from Bioconductor.
+
+```{r Bioconductor install, eval = FALSE}
+if (!requireNamespace("BiocManager"))
+    install.packages("BiocManager")
+BiocManager::install("HGC")
+```
+
+The users could also get the newest version from Github.
 
 ```{r Github install, eval = FALSE}
 if(!require(devtools))
     install.packages("devtools")
-devtools::install_github("XuegongLab/HGC", ref = "HGC4oldRVersion")
+devtools::install_github("XuegongLab/HGC")
 ```
 
-## Quick Start
+# Quick Start
 
-### Input data
+## Input data
 `HGC` takes a matrix as input where  row represents cells and column 
 represents features. Preprocessing steps like normalization and dimension 
 reduction are necessary so that the constructed graph can capture the 
@@ -49,7 +75,7 @@ table(Pollen.Label.Tissue)
 table(Pollen.Label.CellLine)
 ```
 
-### Run HGC
+## Run HGC
 
 There are two major steps for conducting the hierarchical clustering 
 with `HGC`: the graph construction step and the dendrogram construction 
@@ -74,7 +100,7 @@ with the function `cutree`.
 cluster.k5 <- cutree(Pollen.ClusteringTree, k = 5)
 ```
 
-### Visualization
+## Visualization
 
 With various published methods in R, results of `HGC` can be visualized easily. 
 Here we use the R package `dendextend` as an example to visualize the results 
@@ -99,7 +125,7 @@ HGC.PlotDendrogram(tree = Pollen.ClusteringTree,
                     labels = Pollen.labels)
 ```
 
-### Ealuation of the clustering results
+## Ealuation of the clustering results
 
 For datasets with known labels, the clustering results of `HGC` can be 
 evaluated by comparing the consistence between the known labels and the 
@@ -112,7 +138,7 @@ ARI.mat <- HGC.PlotARIs(tree = Pollen.ClusteringTree,
                         labels = Pollen.labels)
 ```
 
-## Time complexity analysis of HGC
+# Time complexity analysis of HGC
 
 Our work shows that the dendrogram construction in `HGC` has a linear time 
 complexity. For advanced users, `HGC` provides functions to conduct time 

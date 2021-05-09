@@ -66,6 +66,15 @@ Pollen.SNN <- SNN.Construction(mat = Pollen.PCs, k = 25, threshold = 0.15)
 Pollen.ClusteringTree <- HGC.dendrogram(G = Pollen.SNN)
 ```
 
+The user could also give `HGC.dendrogram` an adjacency matrix directly, for instance, to read a matrix from `igraph` object and use it to run `HGC`.
+
+```{r}
+require(igraph)
+g <- sample_gnp(10, 2/10)
+G <- as_adjacency_matrix(g, sparse = TRUE)
+G.ClusteringTree <- HGC.dendrogram(G = G)
+```
+
 The output of `HGC` is a standard tree following the data structure `hclust()` 
 in R package `stats`. The tree can be cut into specific number of clusters 
 with the function `cutree`.  

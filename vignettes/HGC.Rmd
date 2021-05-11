@@ -125,7 +125,7 @@ HGC.PlotDendrogram(tree = Pollen.ClusteringTree,
                     labels = Pollen.labels)
 ```
 
-## Ealuation of the clustering results
+## Evaluation of the clustering results
 
 For datasets with known labels, the clustering results of `HGC` can be 
 evaluated by comparing the consistence between the known labels and the 

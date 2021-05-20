@@ -1,39 +1,39 @@
-.renviron 
-.rprofile
+*.renviron 
+*.rprofile
      
-.rproj
-.rproj.user
-.rhistory
+*.rproj
+*.rproj.user
+*.rhistory
        
-.rapp.history
-.o
-.sl
-.so
-.dylib
-.a
-.dll
+*.rapp.history
+*.o
+*.sl
+*.so
+*.dylib
+*.a
+*.dll
 
-.def
-.ds_store
+*.def
+*.ds_store
 unsrturl.bst
-.log
-.aux
-.backups
+*.log
+*.aux
+*.backups
 
-.cproject
-.directory
-.dropbox
-.exrc
-.gdb.history
+*.cproject
+*.directory
+*.dropbox
+*.exrc
+*.gdb.history
 
-.gitattributes
-.gitmodules
-.hgtags
-.project
-.seed
+*.gitattributes
+*.gitmodules
+*.hgtags
+*.project
+*.seed
 
-.settings
-.tm_properties
+*.settings
+*.tm_properties
 
 /src-i386
 /src-x64

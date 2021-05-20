@@ -35,7 +35,7 @@ of the same samples. This function will first cut a given tree into specific
 number of clusters using the function \code{cutree}. Then it calculates the
 ARIs between the clustering result and the given labels
 with the help of R package \code{mclust}. The function does such cutting and
-calculation for different ks between k.min and k.max.Finally it visualize
+calculation for different ks between k.min and k.max. Finally it visualize
 these results using a line chart. ARIs with different labels are shown as
 different lines with different colors in the figure.
 }

@@ -19,7 +19,7 @@ opts_chunk$set(fig.align = 'center',
 
 # Introduction
 
-`HGC` (short for Hierarchical Graph-based Clustering) is a R package for 
+`HGC` (short for Hierarchical Graph-based Clustering) is an R package for 
 conducting  hierarchical clustering on large-scale single-cell RNA-seq 
 (scRNA-seq) data. The key idea is to construct a dendrogram of cells on 
 their shared nearest neighbor (SNN) graph. `HGC` provides functions for 
@@ -54,7 +54,7 @@ devtools::install_github("XuegongLab/HGC")
 `HGC` takes a matrix as input where  row represents cells and column 
 represents features. Preprocessing steps like normalization and dimension 
 reduction are necessary so that the constructed graph can capture the 
-mainfold underlying the single-cell data. We recommend users to follow 
+manifold underlying the single-cell data. We recommend users to follow 
 the standard preprocessing steps in 
 [`Seurat`](https://satijalab.org/seurat/articles/get_started.html). 
 As a demo input, we stored the top 25 principal components of the 
@@ -143,12 +143,12 @@ ARI.mat <- HGC.PlotARIs(tree = Pollen.ClusteringTree,
 Our work shows that the dendrogram construction in `HGC` has a linear time 
 complexity. For advanced users, `HGC` provides functions to conduct time 
 complexity analysis on their own data. The construction of the dendrogram 
-is a recursive procedure of two steps: 1.finding the nearest neighbour pair, 
+is a recursive procedure of two steps: 1. find the nearest neighbour pair, 
 2. merge the node pair and update the graph. For different data structures of 
 graph, there's a trade-off between the time consumptions of the two steps. 
 Generally speaking, storing more information about the graph makes it faster 
 to find the nearest neighbour pair (step 1) but slower to update the graph 
-(step 2). We have experimented serval datasets and chosen the best data 
+(step 2). We have experimented several datasets and chosen the best data 
 structure for the overall efficiency. 
 
 The key parameters related to the time consumptions of the two steps are the 

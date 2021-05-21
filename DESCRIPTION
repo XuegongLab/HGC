@@ -1,7 +1,7 @@
 Package: HGC
 Type: Package
 Title: A fast hierarchical graph-based clustering method
-Version: 0.99.3
+Version: 1.0.1
 Authors@R: c(person("Zou", "Ziheng",
                 email = "zouzh14@gmail.com",
                 role=c("aut")),
@@ -10,11 +10,11 @@ Authors@R: c(person("Zou", "Ziheng",
              person("XGlab",
                 email = "xglab@mail.tsinghua.edu.cn",
                 role=c("cre", "cph")))
-Description: `HGC` (short for Hierarchical Graph-based Clustering) is a R package for 
-        conducting  hierarchical clustering on large-scale single-cell RNA-seq 
+Description: HGC (short for Hierarchical Graph-based Clustering) is an R package for 
+        conducting hierarchical clustering on large-scale single-cell RNA-seq 
         (scRNA-seq) data. The key idea is to construct a dendrogram of cells on 
-        their shared nearest neighbor (SNN) graph. `HGC` provides functions for 
-        building cell graphs and for conducting hierarchical clustering on the graph.
+        their shared nearest neighbor (SNN) graph. HGC provides functions for 
+        building graphs and for conducting hierarchical clustering on the graph.
 License: GPL-3
 Encoding: UTF-8
 SystemRequirements: C++11

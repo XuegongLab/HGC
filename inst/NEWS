@@ -20,6 +20,10 @@ HGC 1.0.0 (Release date: 2021-05-20):
 
     * The official version 1.0.0 is available in Bioconductor.
 
-HGC 1.0.1 (Release date: 2021-05-21):
+HGC 1.1.0 (Release date: 2021-05-20):
+
+    * The development version 1.1.0 is available in Bioconductor.
+
+HGC 1.1.1 (Release date: 2021-05-27):
 
     * Modify the package manual.

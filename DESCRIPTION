@@ -1,7 +1,7 @@
 Package: HGC
 Type: Package
 Title: A fast hierarchical graph-based clustering method
-Version: 1.0.1
+Version: 1.1.1
 Authors@R: c(person("Zou", "Ziheng",
                 email = "zouzh14@gmail.com",
                 role=c("aut")),

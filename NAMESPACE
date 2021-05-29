@@ -11,6 +11,7 @@ export(PMST.Construction)
 export(HGC.PlotDendrogram)
 export(HGC.PlotARIs)
 export(HGC.PlotParameter)
+export(FindClusteringTree)
 
 import(Matrix)
 import(Rcpp)

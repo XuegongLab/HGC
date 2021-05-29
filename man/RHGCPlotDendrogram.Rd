@@ -4,7 +4,7 @@
 Visualizing the dendrogram
 }
 \description{
-The function will plot the dendrogram, with 
+The function will plot the dendrogram, with
 different colors for different clusters.
 }
 \usage{
@@ -31,13 +31,13 @@ HGC.PlotDendrogram(tree, k, plot.label, labels)
 \details{
 The function plots the clustering tree, with alternative colors showing
 the clustering results and the label information. It is based on the R
-package \code{dendextend} which contains contains many parameters for the
+package \code{dendextend} which contains many parameters for the
 visualization. For users' convenience, most of the parameters are set to
 be the default value. Advanced users could
 visit the vignette of \code{dendextend} for more flexible visualization.
 }
 \value{
-The function will return 1 if the dendrogram is sucessfully drawn.
+The function will return 1 if the dendrogram is successfully drawn.
 }
 \examples{
 data(Pollen)

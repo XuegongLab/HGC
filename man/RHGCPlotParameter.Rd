@@ -26,7 +26,7 @@ provides the
 visualization of them.
 }
 \value{
-The function will return 1 if the dendrogram is sucessfully drawn.
+The function will return 1 if the dendrogram is successfully drawn.
 }
 \examples{
 data(Pollen)

@@ -24,7 +24,7 @@ PMST.Construction(mat, iter, r)
 }
 \details{
 The function builds a PMST graph of the input data. PMST is the
-combination of a number of MSTs, which are built in the pertured data
+combination of a number of MSTs, which are built in the perturbed data
 spaces.
 }
 \value{

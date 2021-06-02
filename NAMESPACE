@@ -12,6 +12,7 @@ export(HGC.PlotDendrogram)
 export(HGC.PlotARIs)
 export(HGC.PlotParameter)
 export(FindClusteringTree)
+export(cluster_HGC)
 
 import(Matrix)
 import(Rcpp)

@@ -8,7 +8,7 @@ The HGC algorithm embeded in Seurat pipeline
 The \code{HGC} with the SNN or KNN calculated by the \code{Seurat} pipeline. The output clustering tree is also packaged in the \code{Seurat} object.
 }
 \usage{
-FindClusteringTree(object = SeuratObj, graph.type = "SNN", random.seed = 0)
+FindClusteringTree(object = SeuratObj, graph.type = "SNN")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -17,9 +17,6 @@ FindClusteringTree(object = SeuratObj, graph.type = "SNN", random.seed = 0)
 }
   \item{graph.type}{
   The type of graphs used for the hierarchical clustering, could be "SNN" or "KNN". The default value is "SNN".
-}
-  \item{random.seed}{
-  The seed for random number generation. The default is 0.
 }
 }
 \details{

@@ -1,5 +1,5 @@
-FindClusteringTree <- function(object, graph.type = "SNN", random.seed = 0){
-  set.seed(random.seed)
+# running HGC in existing Seurat object, and save the tree in the object
+FindClusteringTree <- function(object, graph.type = "SNN"){
   require(Seurat)
   require(Matrix)
 
@@ -22,4 +22,13 @@ FindClusteringTree <- function(object, graph.type = "SNN", random.seed = 0){
     stop("The kind of graph is not used by Seurat.")
   }
 
+}
+
+# running HGC in existing igraph object, and output the clustering tree
+# we will try to save the tree in the igraph object in later version
+cluster_HGC <- function(graph){
+  require(igraph)
+  G <- as_adjacency_matrix(graph, sparse = TRUE)
+  G.ClusteringTree <- HGC.dendrogram(G = G)
+  return(G.ClusteringTree)
 }

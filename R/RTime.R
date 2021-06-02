@@ -3,7 +3,6 @@
 
 HGC.parameter <- function(G){
     # Run clustering
-    checkGraph(G)
     record = HierarCluster_paris_time(G)
     rownames(record) = c("ChainLength", "AvgNeighNum")
 

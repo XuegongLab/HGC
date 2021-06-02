@@ -2,30 +2,14 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 HierarCluster_paris <- function(m) {
-    .Call(`_HGC_HierarCluster_paris`, m)
+    .Call(`_HGC_core_HierarCluster_paris`, m)
 }
 
 HierarCluster_paris_time <- function(m) {
-    .Call(`_HGC_HierarCluster_paris_time`, m)
+    .Call(`_HGC_core_HierarCluster_paris_time`, m)
 }
 
 get_leaves <- function(hglink) {
-    .Call(`_HGC_get_leaves`, hglink)
-}
-
-ComputeSNN <- function(nn_ranked, prune) {
-    .Call(`_HGC_ComputeSNN`, nn_ranked, prune)
-}
-
-WriteEdgeFile <- function(snn, filename, display_progress) {
-    invisible(.Call(`_HGC_WriteEdgeFile`, snn, filename, display_progress))
-}
-
-DirectSNNToFile <- function(nn_ranked, prune, display_progress, filename) {
-    .Call(`_HGC_DirectSNNToFile`, nn_ranked, prune, display_progress, filename)
-}
-
-SNN_SmallestNonzero_Dist <- function(snn, mat, n, nearest_dist) {
-    .Call(`_HGC_SNN_SmallestNonzero_Dist`, snn, mat, n, nearest_dist)
+    .Call(`_HGC_core_get_leaves`, hglink)
 }
 

@@ -44,8 +44,10 @@ rownames of G in default.}
 More details about the components are in the \link[stats]{hclust}.
 }
 \examples{
-data(Pollen)
-Pollen.PCs <- Pollen[["PCs"]]
-G <- SNN.Construction(Pollen.PCs, 25, 0.15)
+require(Matrix)
+
+G <- matrix(c(1:100), nrow = 10, ncol = 10)
+G <- G + t(G)
+G <- as(G, "dgCMatrix")
 tree = HGC.dendrogram(G)
 }

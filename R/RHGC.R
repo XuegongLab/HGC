@@ -2,7 +2,6 @@
 
 HGC.dendrogram <- function(G){
     # Run clustering
-    checkGraph(G)
     hg.linkageMatrix = HierarCluster_paris(G)
 
     # check the linkageMatrix

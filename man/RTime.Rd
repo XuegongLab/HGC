@@ -38,8 +38,10 @@ length and the average neighbor number. m is equal to n-s, where s is
 the number of unconnected parts in the graph.
 }
 \examples{
-data(Pollen)
-Pollen.PCs <- Pollen[["PCs"]]
-G <- SNN.Construction(Pollen.PCs, 25, 0.15)
+require(Matrix)
+
+G <- matrix(c(1:100), nrow = 10, ncol = 10)
+G <- G + t(G)
+G <- as(G, "dgCMatrix")
 record = HGC.parameter(G)
 }

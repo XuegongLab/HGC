@@ -3,19 +3,19 @@ FindClusteringTree <- function(object, graph.type = "SNN"){
   require(Seurat)
   require(Matrix)
 
-  SeuratDefaultAssay <- DefaultAssay(object)
+  SeuratDefaultAssay <- Seurat::DefaultAssay(object)
 
   if(graph.type == "SNN"){
     SNN_name = paste(SeuratDefaultAssay, "_snn", sep = "")
-    G = as.sparse(object@graphs[[SNN_name]])
-    ClusteringTree = HGC.paris(G)
+    G = Seurat::as.sparse(object@graphs[[SNN_name]])
+    ClusteringTree = HGC.dendrogram(G)
     object@graphs[["ClusteringTree"]] = ClusteringTree
     return(object)
   }else if(graph.type == "KNN"){
     KNN_name = paste(SeuratDefaultAssay, "_nn", sep = "")
-    G = as.sparse(object@graphs[[KNN_name]])
+    G = Seurat::as.sparse(object@graphs[[KNN_name]])
     G = G + t(G)
-    ClusteringTree = HGC.paris(G)
+    ClusteringTree = HGC.dendrogram(G)
     object@graphs[["ClusteringTree"]] = ClusteringTree
     return(object)
   }else{
@@ -28,7 +28,7 @@ FindClusteringTree <- function(object, graph.type = "SNN"){
 # we will try to save the tree in the igraph object in later version
 cluster_HGC <- function(graph){
   require(igraph)
-  G <- as_adjacency_matrix(graph, sparse = TRUE)
-  G.ClusteringTree <- HGC.dendrogram(G = G)
+  G <- igraph::as_adjacency_matrix(graph, sparse = TRUE)
+  G.ClusteringTree <- HGC.dendrogram(G)
   return(G.ClusteringTree)
 }

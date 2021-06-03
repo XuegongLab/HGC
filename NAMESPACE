@@ -2,6 +2,8 @@ useDynLib(HGC.core, .registration = TRUE)
 
 export(HGC.dendrogram)
 export(HGC.parameter)
+export(FindClusteringTree)
+export(cluster_HGC)
 
 import(Matrix)
 import(Rcpp)

@@ -27,3 +27,7 @@ HGC 1.1.0 (Release date: 2021-05-20):
 HGC 1.1.1 (Release date: 2021-05-27):
 
     * Modify the package manual.
+
+HGC 1.1.2 (Release date: 2021-06-06):
+
+    * Add APIs for Seurat pipeline and igraph object.

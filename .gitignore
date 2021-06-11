@@ -37,6 +37,7 @@ unsrturl.bst
 
 /src-i386
 /src-x64
+/build
 /.Rproj.user
 .rbuildignore
 .Rproj

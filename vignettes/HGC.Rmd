@@ -100,45 +100,18 @@ with the function `cutree`.
 cluster.k5 <- cutree(Pollen.ClusteringTree, k = 5)
 ```
 
-## Visualization
-
-With various published methods in R, results of `HGC` can be visualized easily. 
-Here we use the R package `dendextend` as an example to visualize the results 
-on the Pollen dataset. The tree has been cut into five clusters. And for a 
-better visualization, the height of the tree has been log-transformed.
-
-```{r, fig.height = 4.5}
-Pollen.ClusteringTree$height = log(Pollen.ClusteringTree$height + 1)
-Pollen.ClusteringTree$height = log(Pollen.ClusteringTree$height + 1)
-
-HGC.PlotDendrogram(tree = Pollen.ClusteringTree,
-                    k = 5, plot.label = FALSE)
-```
-We can also add a colour bar of the known label under the dendrogram as a 
-comparison of the achieved clustering results.
-
-```{r, fig.height = 4.5}
-Pollen.labels <- data.frame(Tissue = Pollen.Label.Tissue,
-                            CellLine = Pollen.Label.CellLine)
-HGC.PlotDendrogram(tree = Pollen.ClusteringTree,
-                    k = 5, plot.label = TRUE, 
-                    labels = Pollen.labels)
-```
-
-## Evaluation of the clustering results
-
-For datasets with known labels, the clustering results of `HGC` can be 
-evaluated by comparing the consistence between the known labels and the 
-achieved clusters. Adjusted Rand Index (ARI) is a wildly used statistics 
-for this purpose. Here we calculate the ARIs of the clustering results at 
-different levels of the dendrogram with the two known labels. 
-
-```{r}
-ARI.mat <- HGC.PlotARIs(tree = Pollen.ClusteringTree,
-                        labels = Pollen.labels)
-```
-
 ## Run HGC with existing scRNA-seq data processing pipelines
+
+`HGC` provides user-friendly functions to run hierarchical 
+clustering in the existing pipelines, like `Seurat`, 
+`scran`, etc. The section will provide the corresponding 
+guides.
+
+The functions `FindClusteringTree` and `cluster_HGC` 
+could read the graphs calculated in the pipelines. 
+Then they build the dendrograms and output/save the 
+trees. We will try our best to support the applications 
+of `HGC` in more pipelines.
 
 ### Seurat pipeline
 
@@ -150,7 +123,8 @@ It is designed for QC, analysis and exploration of scRNA-seq data.
 Leiden to find the cell clusters. They all run on the graph built by 
 the function `FindNeighbors` in `Seurat`.
 
-Here we provide a guide to run HGC in `Seurat` pipeline and utilize the 
+Here we provide a guide to run `FindClusteringTree` in 
+`Seurat` pipeline using the SNN/KNN 
 graph calculated by `Seurat`. The data comes from the 
 ["pbmc3k_tutorial"](https://satijalab.org/seurat/articles/pbmc3k_tutorial.html) 
 of `Seurat`. We follow the tutorial to run QC, preprocessing, 
@@ -202,20 +176,27 @@ pbmc <- FindClusteringTree(pbmc, graph.type = "SNN")
 pbmc.tree <- pbmc@graphs$ClusteringTree
 ```
 
-### igraph object
+The input of `FindClusteringTree` is the `Seurat` object and the function outputs a `Seurat` object containing the dendrogram.
 
-Some scRNA-seq processing pipelines include 
-[`igraph`](https://igraph.org/r/) package 
-to run the graph-related calculation, like 
-[`scran`](https://bioconductor.org/packages/scran), 
-[`OSCA`](http://bioconductor.org/books/release/OSCA/), 
-etc.
+### scran pipeline
 
-The igraph package has the specific data structure to 
-save graphs, and the pipelines utilize the structure 
-to save the graph built on scRNA-seq datasets. Here 
-we show a guild for utilizing `HGC` to cluster `igraph` 
-object in `scran` pipeline.
+[`scran`](https://bioconductor.org/packages/scran) is a wildly 
+used step-by-step workflow for low-level analysis of scRNA-seq 
+data. It builds SNN graph with the function `buildSNNGraph` and 
+saves the graph as `igraph` object. `HGC` provides the function 
+`cluster_HGC` to run hierarchical clustering with the `igraph` object.
+
+The `igraph` package is a toolbox to do graph-related 
+calculations in R. It has the specific data structure to 
+save graphs and contains several graph-based clustering functions. 
+Another pipeline 
+[`OSCA`](http://bioconductor.org/books/release/OSCA/) uses 
+`igraph` to cluster the cells, and `cluster_HGC` 
+could also help.
+
+Here we follow the tutorial of `scran` and show how to 
+use the `cluster_HGC` to build clustering tree on the 
+processed scRNA-seq data.
 
 ```{r, eval = FALSE}
 # Setting up the data
@@ -264,6 +245,48 @@ colLabels(sce) <- factor(cluster.k12)
 library(scater)
 sce <- runTSNE(sce, dimred="PCAsub")
 plotTSNE(sce, colour_by="label", text_by="label")
+```
+
+The input of `cluster_HGC` is the graph saved as `igraph` 
+object, and the output is the tree saved as `hclust` object. 
+The document of `cluster_HGC` contains more details.
+
+## Visualization
+
+With various published methods in R, results of `HGC` can be visualized easily. 
+Here we use the R package `dendextend` as an example to visualize the results 
+on the Pollen dataset. The tree has been cut into five clusters. And for a 
+better visualization, the height of the tree has been log-transformed.
+
+```{r, fig.height = 4.5}
+Pollen.ClusteringTree$height = log(Pollen.ClusteringTree$height + 1)
+Pollen.ClusteringTree$height = log(Pollen.ClusteringTree$height + 1)
+
+HGC.PlotDendrogram(tree = Pollen.ClusteringTree,
+                    k = 5, plot.label = FALSE)
+```
+We can also add a colour bar of the known label under the dendrogram as a 
+comparison of the achieved clustering results.
+
+```{r, fig.height = 4.5}
+Pollen.labels <- data.frame(Tissue = Pollen.Label.Tissue,
+                            CellLine = Pollen.Label.CellLine)
+HGC.PlotDendrogram(tree = Pollen.ClusteringTree,
+                    k = 5, plot.label = TRUE, 
+                    labels = Pollen.labels)
+```
+
+## Evaluation of the clustering results
+
+For datasets with known labels, the clustering results of `HGC` can be 
+evaluated by comparing the consistence between the known labels and the 
+achieved clusters. Adjusted Rand Index (ARI) is a wildly used statistics 
+for this purpose. Here we calculate the ARIs of the clustering results at 
+different levels of the dendrogram with the two known labels. 
+
+```{r}
+ARI.mat <- HGC.PlotARIs(tree = Pollen.ClusteringTree,
+                        labels = Pollen.labels)
 ```
 
 # Time complexity analysis of HGC

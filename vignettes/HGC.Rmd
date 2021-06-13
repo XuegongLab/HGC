@@ -107,7 +107,7 @@ clustering in the existing pipelines, like `Seurat`,
 `scran`, etc. The section will provide the corresponding 
 guides.
 
-The functions `FindClusteringTree` and `cluster_HGC` 
+The functions `FindClusteringTree` and `HGC.dendrogram` 
 could read the graphs calculated in the pipelines. 
 Then they build the dendrograms and output/save the 
 trees. We will try our best to support the applications 
@@ -176,7 +176,9 @@ pbmc <- FindClusteringTree(pbmc, graph.type = "SNN")
 pbmc.tree <- pbmc@graphs$ClusteringTree
 ```
 
-The input of `FindClusteringTree` is the `Seurat` object and the function outputs a `Seurat` object containing the dendrogram.
+The input of `FindClusteringTree` is the `Seurat` object and 
+the function outputs a `Seurat` object containing the 
+dendrogram.
 
 ### scran pipeline
 
@@ -184,7 +186,8 @@ The input of `FindClusteringTree` is the `Seurat` object and the function output
 used step-by-step workflow for low-level analysis of scRNA-seq 
 data. It builds SNN graph with the function `buildSNNGraph` and 
 saves the graph as `igraph` object. `HGC` provides the function 
-`cluster_HGC` to run hierarchical clustering with the `igraph` object.
+`HGC.dendrogram` to run hierarchical clustering with the 
+`igraph` object.
 
 The `igraph` package is a toolbox to do graph-related 
 calculations in R. It has the specific data structure to 
@@ -237,7 +240,7 @@ library(HGC)
 # Graph construction
 g <- buildSNNGraph(sce, use.dimred="PCAsub")
 # Graph-based clustering
-cluster.tree <- cluster_HGC(graph = g)
+cluster.tree <- HGC.dendrogram(G = g)
 cluster.k12 <- cutree(cluster.tree, k = 12)
 
 colLabels(sce) <- factor(cluster.k12)

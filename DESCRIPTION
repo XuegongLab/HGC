@@ -20,7 +20,8 @@ Encoding: UTF-8
 SystemRequirements: C++11
 Depends: R (>= 4.1.0)
 Imports: Rcpp (>= 1.0.0), RcppEigen(>= 0.3.2.0), Matrix, RANN, ape,
-        dendextend, ggplot2, mclust, patchwork, dplyr, grDevices
+        dendextend, ggplot2, mclust, patchwork, dplyr, grDevices, 
+        methods
 LinkingTo: Rcpp, RcppEigen
 Suggests: BiocStyle, rmarkdown, knitr, testthat (>= 3.0.0)
 VignetteBuilder: knitr

@@ -1,6 +1,10 @@
 # HGC.paris is the main function to cluster. It outputs the clustering tree.
 
 HGC.dendrogram <- function(G){
+    UseMethod("HGC.dendrogram")
+}
+
+HGC.dendrogram.default <- function(G){
     # Run clustering
     checkGraph(G)
     hg.linkageMatrix = HierarCluster_paris(G)
@@ -41,4 +45,24 @@ HGC.dendrogram <- function(G){
     }
 
     return(hg.tree2)
+}
+
+HGC.dendrogram.dgCMatrix <- function(G){
+    return(HGC.dendrogram.default(G))
+}
+
+HGC.dendrogram.graph <- function(G){
+    class(G) <- "dgCMatrix"
+    return(HGC.dendrogram.default(G))
+}
+
+HGC.dendrogram.matrix <- function(G){
+    G <- as(G, "dgCMatrix")
+    return(HGC.dendrogram.default(G))    
+}
+
+HGC.dendrogram.igraph <- function(G){
+    require(igraph)
+    G <- igraph::as_adjacency_matrix(G, sparse = TRUE)
+    return(HGC.dendrogram.default(G))
 }

@@ -11,10 +11,13 @@ HGC.dendrogram(G)
 }
 \arguments{
     \item{G}{
-    an undirected graph saved as a dgCMatrix. The matrix G is the
-    adjacency matrix of the graph, where G[i,j] is the weight
+    an object which represents the adjacency matrix of the graph, 
+    where G[i,j] is the weight
     of the edge between node i and node j, and zero means
     no link.
+    
+    The supported data structures include \code{matrix}, 
+    \code{dgCMatrix}, \code{graph}, and \code{igraph}.
     }
 }
 \details{

@@ -2,32 +2,40 @@
 \alias{FindClusteringTree}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-The HGC algorithm embeded in Seurat pipeline
+The HGC algorithm embedded in Seurat pipeline
 }
 \description{
-The \code{HGC} with the SNN or KNN calculated by the \code{Seurat} pipeline. The output clustering tree is also packaged in the \code{Seurat} object.
+The function runs hierarchical clustering with \code{HGC.dendrogram} 
+on the SNN or KNN calculated by the \code{Seurat} 
+pipeline. The output clustering tree is also packaged in the 
+\code{Seurat} object.
 }
 \usage{
-FindClusteringTree(object = SeuratObj, graph.type = "SNN")
+FindClusteringTree(object, graph.type)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{object}{
-  The Seurat object containing the graphs built with scRNA-seq data.
+    \item{object}{
+    The Seurat object containing the graphs built with scRNA-seq data.
 }
-  \item{graph.type}{
-  The type of graphs used for the hierarchical clustering, could be "SNN" or "KNN". The default value is "SNN".
+    \item{graph.type}{
+    The type of graphs used for the hierarchical clustering, could be 
+    "SNN" or "KNN". The default value is "SNN".
 }
 }
 \details{
-For the KNN graph, we symmetrize it by adding its transposition on the graph. And for the details of data preprocessing and graph construction by \code{Seurat}, please check the \code{Seurat} vignettes.
+For the KNN graph, we symmetrize it by adding its transposition on 
+the graph. And for the details of data preprocessing and graph construction 
+by \code{Seurat}, please check the \code{Seurat} vignettes.
 }
 \value{
-An \code{Seurat} object. The clustering tree is saved under the item \code{graphs}, i.e. \code{object@graphs$ClusteringTree}.
+An \code{Seurat} object. The clustering tree is saved under the item 
+\code{graphs}, i.e. \code{object@graphs$ClusteringTree}.
 }
 
 \note{
-The function needs the R package \code{Seurat}. We recommend that the version of \code{Seurat} is higher than version 3.0.
+The function needs the R package \code{Seurat}. We recommend that the 
+version of \code{Seurat} is higher than version 3.0.
 }
 
 \examples{

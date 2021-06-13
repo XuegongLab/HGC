@@ -1,6 +1,6 @@
 ---
 title: "HGC package manual"
-author: "Zou Ziheng, Kui Hua"
+author: "Zou Ziheng, Hua Kui"
 date: "`r Sys.Date()`"
 output:
     BiocStyle::html_document:
@@ -99,6 +99,160 @@ with the function `cutree`.
 ```{r}
 cluster.k5 <- cutree(Pollen.ClusteringTree, k = 5)
 ```
+
+## Run HGC with existing scRNA-seq data processing pipelines
+
+`HGC` provides user-friendly functions to run hierarchical 
+clustering in the existing pipelines, like `Seurat`, 
+`scran`, etc. The section will provide the corresponding 
+guides.
+
+The functions `FindClusteringTree` and `HGC.dendrogram` 
+could read the graphs calculated in the pipelines. 
+Then they build the dendrograms and output/save the 
+trees. We will try our best to support the applications 
+of `HGC` in more pipelines.
+
+### Seurat pipeline
+
+The [`Seurat`](https://satijalab.org/seurat/) package is one popular 
+scRNA-seq data processing workflow. 
+It is designed for QC, analysis and exploration of scRNA-seq data. 
+
+`Seurat` contains the graph-based clustering methods Louvain, SLM and 
+Leiden to find the cell clusters. They all run on the graph built by 
+the function `FindNeighbors` in `Seurat`.
+
+Here we provide a guide to run `FindClusteringTree` in 
+`Seurat` pipeline using the SNN/KNN 
+graph calculated by `Seurat`. The data comes from the 
+["pbmc3k_tutorial"](https://satijalab.org/seurat/articles/pbmc3k_tutorial.html) 
+of `Seurat`. We follow the tutorial to run QC, preprocessing, 
+dimension reduction and SNN graph construction. Then we run HGC in 
+the calculated graph with one order.
+
+```{r, eval = FALSE}
+library(dplyr)
+library(Seurat)
+library(patchwork)
+library(HGC)
+
+# Load the PBMC dataset
+pbmc.data <- Read10X(data.dir = 
+                "../data/pbmc3k/filtered_gene_bc_matrices/hg19/")
+# Initialize the Seurat object with the raw (non-normalized data).
+pbmc <- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k", 
+                            min.cells = 3, min.features = 200)
+
+# QC and selecting cells for further analysis
+pbmc[["percent.mt"]] <- PercentageFeatureSet(pbmc, pattern = "^MT-")
+pbmc <- subset(pbmc, subset = nFeature_RNA > 200 & 
+                nFeature_RNA < 2500 & percent.mt < 5)
+
+# Normalizing the data
+pbmc <- NormalizeData(pbmc, normalization.method = "LogNormalize", 
+                        scale.factor = 10000)
+
+# Identification of highly variable features (feature selection)
+pbmc <- FindVariableFeatures(pbmc, selection.method = "vst", 
+                                nfeatures = 2000)
+
+# Scaling the data
+all.genes <- rownames(pbmc)
+pbmc <- ScaleData(pbmc, features = all.genes)
+
+# Perform linear dimensional reduction
+pbmc <- RunPCA(pbmc, features = VariableFeatures(object = pbmc))
+
+# Determine the ‘dimensionality’ of the dataset
+pbmc <- JackStraw(pbmc, num.replicate = 100)
+pbmc <- ScoreJackStraw(pbmc, dims = 1:20)
+
+# Construct the graph and cluster the cells with HGC
+pbmc <- FindNeighbors(pbmc, dims = 1:10)
+pbmc <- FindClusteringTree(pbmc, graph.type = "SNN")
+
+# Output the tree
+pbmc.tree <- pbmc@graphs$ClusteringTree
+```
+
+The input of `FindClusteringTree` is the `Seurat` object and 
+the function outputs a `Seurat` object containing the 
+dendrogram.
+
+### scran pipeline
+
+[`scran`](https://bioconductor.org/packages/scran) is a wildly 
+used step-by-step workflow for low-level analysis of scRNA-seq 
+data. It builds SNN graph with the function `buildSNNGraph` and 
+saves the graph as `igraph` object. `HGC` provides the function 
+`HGC.dendrogram` to run hierarchical clustering with the 
+`igraph` object.
+
+The `igraph` package is a toolbox to do graph-related 
+calculations in R. It has the specific data structure to 
+save graphs and contains several graph-based clustering functions. 
+Another pipeline 
+[`OSCA`](http://bioconductor.org/books/release/OSCA/) uses 
+`igraph` to cluster the cells, and `cluster_HGC` 
+could also help.
+
+Here we follow the tutorial of `scran` and show how to 
+use the `cluster_HGC` to build clustering tree on the 
+processed scRNA-seq data.
+
+```{r, eval = FALSE}
+# Setting up the data
+library(scRNAseq)
+sce <- GrunPancreasData()
+
+library(scuttle)
+qcstats <- perCellQCMetrics(sce)
+qcfilter <- quickPerCellQC(qcstats, 
+                            percent_subsets="altexps_ERCC_percent")
+sce <- sce[,!qcfilter$discard]
+
+library(scran)
+clusters <- quickCluster(sce)
+sce <- computeSumFactors(sce, clusters=clusters)
+sce <- logNormCounts(sce)
+
+# Variance modelling
+dec <- modelGeneVar(sce)
+plot(dec$mean, dec$total, xlab="Mean log-expression", 
+        ylab="Variance")
+curve(metadata(dec)$trend(x), col="blue", add=TRUE)
+
+# Get the top 10% of genes.
+top.hvgs <- getTopHVGs(dec, prop=0.1)
+
+sce <- fixedPCA(sce, subset.row=top.hvgs)
+reducedDimNames(sce)
+
+# Automated PC choice
+output <- getClusteredPCs(reducedDim(sce))
+npcs <- metadata(output)$chosen
+reducedDim(sce, "PCAsub") <- 
+    reducedDim(sce, "PCA")[,1:npcs,drop=FALSE]
+
+
+library(HGC)
+# Graph construction
+g <- buildSNNGraph(sce, use.dimred="PCAsub")
+# Graph-based clustering
+cluster.tree <- HGC.dendrogram(G = g)
+cluster.k12 <- cutree(cluster.tree, k = 12)
+
+colLabels(sce) <- factor(cluster.k12)
+
+library(scater)
+sce <- runTSNE(sce, dimred="PCAsub")
+plotTSNE(sce, colour_by="label", text_by="label")
+```
+
+The input of `cluster_HGC` is the graph saved as `igraph` 
+object, and the output is the tree saved as `hclust` object. 
+The document of `cluster_HGC` contains more details.
 
 ## Visualization
 

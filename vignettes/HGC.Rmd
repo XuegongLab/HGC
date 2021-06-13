@@ -185,20 +185,20 @@ dendrogram.
 [`scran`](https://bioconductor.org/packages/scran) is a wildly 
 used step-by-step workflow for low-level analysis of scRNA-seq 
 data. It builds SNN graph with the function `buildSNNGraph` and 
-saves the graph as `igraph` object. `HGC` provides the function 
-`HGC.dendrogram` to run hierarchical clustering with the 
-`igraph` object.
+saves the graph as `igraph` object. The function 
+`HGC.dendrogram` could run hierarchical clustering 
+with the `igraph` object.
 
 The `igraph` package is a toolbox to do graph-related 
 calculations in R. It has the specific data structure to 
 save graphs and contains several graph-based clustering functions. 
 Another pipeline 
 [`OSCA`](http://bioconductor.org/books/release/OSCA/) uses 
-`igraph` to cluster the cells, and `cluster_HGC` 
+`igraph` to cluster the cells, and `HGC.dendrogram` 
 could also help.
 
 Here we follow the tutorial of `scran` and show how to 
-use the `cluster_HGC` to build clustering tree on the 
+use the `HGC.dendrogram` to build clustering tree on the 
 processed scRNA-seq data.
 
 ```{r, eval = FALSE}
@@ -250,9 +250,9 @@ sce <- runTSNE(sce, dimred="PCAsub")
 plotTSNE(sce, colour_by="label", text_by="label")
 ```
 
-The input of `cluster_HGC` is the graph saved as `igraph` 
+The input of `HGC.dendrogram` is the graph saved as `igraph` 
 object, and the output is the tree saved as `hclust` object. 
-The document of `cluster_HGC` contains more details.
+The document of `HGC.dendrogram` contains more details.
 
 ## Visualization
 

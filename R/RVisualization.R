@@ -33,7 +33,7 @@ HGC.PlotDendrogram <- function(tree, k = 5, plot.label = FALSE, labels){
             temp_n_label <- length(unique(labels[,i]))
             n_diff_labels[i] <- temp_n_label
         }
-        T.colourbar <- matrix(nrow = ncell, ncol = n_label)
+        T.colourbar <- matrix(0, nrow = ncell, ncol = n_label)
         colnames(T.colourbar) = colnames(labels)
         for(i in seq_len(n_label)){
             temp_label <- labels[,i]
@@ -41,12 +41,13 @@ HGC.PlotDendrogram <- function(tree, k = 5, plot.label = FALSE, labels){
             temp_n_label <- n_diff_labels[i]
             temp_colourbar <- gg_color_ggplot(temp_n_label)
             for(j in seq_len(temp_n_label)){
-                T.colourbar[which(temp_label ==
+              T.colourbar[which(temp_label ==
                                 temp_u_label[j]),i] = temp_colourbar[j]
             }
         }
         plot(dend)
-        dendextend::colored_bars(colors = T.colourbar,dend = dend)
+        dendextend::colored_bars(colors = T.colourbar[
+            order.dendrogram(dend),])
         return(1)
     }
 }

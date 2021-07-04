@@ -46,7 +46,8 @@ HGC.PlotDendrogram <- function(tree, k = 5, plot.label = FALSE, labels){
             }
         }
         plot(dend)
-        dendextend::colored_bars(colors = T.colourbar,dend = dend)
+        dendextend::colored_bars(colors = T.colourbar[
+            order.dendrogram(dend),])
         return(1)
     }
 }

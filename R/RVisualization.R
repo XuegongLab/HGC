@@ -41,7 +41,7 @@ HGC.PlotDendrogram <- function(tree, k = 5, plot.label = FALSE, labels){
             temp_n_label <- n_diff_labels[i]
             temp_colourbar <- gg_color_ggplot(temp_n_label)
             for(j in seq_len(temp_n_label)){
-              T.colourbar[which(temp_label ==
+                T.colourbar[which(temp_label ==
                                 temp_u_label[j]),i] = temp_colourbar[j]
             }
         }

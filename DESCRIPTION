@@ -1,7 +1,7 @@
 Package: HGC
 Type: Package
 Title: A fast hierarchical graph-based clustering method
-Version: 0.99.6
+Version: 0.99.7
 Authors@R: c(person("Zou", "Ziheng",
                 email = "zouzh14@gmail.com",
                 role=c("aut")),
@@ -21,7 +21,7 @@ SystemRequirements: C++11
 Depends: R (>= 3.6.0)
 Imports: Rcpp (>= 1.0.0), RcppEigen(>= 0.3.2.0), Matrix, RANN, ape,
         dendextend, ggplot2, mclust, patchwork, dplyr, grDevices, 
-        dynamicTreeCut, methods
+        dynamicTreeCut, methods, stats
 LinkingTo: Rcpp, RcppEigen
 Suggests: BiocStyle, rmarkdown, knitr, testthat, Seurat
 VignetteBuilder: knitr

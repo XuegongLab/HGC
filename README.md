@@ -36,7 +36,8 @@ devtools::install_github("XuegongLab/HGC")
 Different branches here provide variants of `HGC` for convenience. The
 `HGC` packages from `bioconductor` and Github master branch are built in 
 R 4.1. For the users with lower R versions, we suggest to use the `HGC` in 
-HGC4oldRVersion branch.
+[HGC4oldRVersion](https://github.com/XuegongLab/HGC/tree/HGC4oldRVersion) 
+branch.
 
 ```{r Github install, eval = FALSE}
 if(!require(devtools))
@@ -45,7 +46,8 @@ devtools::install_github("XuegongLab/HGC", ref = "HGC4oldRVersion")
 ```
 
 For the users just interested in the core hierarchical clustering functions, 
-they could reference the HGC_core branch.
+they could reference the 
+[HGC_core](https://github.com/XuegongLab/HGC/tree/HGC_core) branch.
 
 ```{r Github install, eval = FALSE}
 if(!require(devtools))

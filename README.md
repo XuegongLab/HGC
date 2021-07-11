@@ -9,17 +9,48 @@ building cell graphs and for conducting hierarchical clustering on the graph.
 Experiments on benchmark datasets showed that `HGC` can reveal the 
 hierarchical structure underlying the data, achieve state-of-the-art 
 clustering accuracy and has better scalability to large single-cell data. 
-For more information, please refer to the preprint of `HGC` on 
+For more information, please refer to the paper on 
+[bioinformatics](https://doi.org/10.1093/bioinformatics/btab420) 
+or the preprint of `HGC` on 
 [bioRxiv](https://doi.org/10.1101/2021.02.07.430106).
 
 ## Installation
 
-`HGC` could be installed from Github.
+`HGC` has been published on 
+[bioconductor](https://bioconductor.org/packages/HGC/).
+
+```
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("HGC")
+```
+
+`HGC` could also be installed from Github.
 
 ```{r Github install, eval = FALSE}
 if(!require(devtools))
     install.packages("devtools")
 devtools::install_github("XuegongLab/HGC")
+```
+
+Different branches here provide variants of `HGC` for convenience. The
+`HGC` packages from `bioconductor` and Github master branch are built in 
+R 4.1. For the users with lower R versions, we suggest to use the `HGC` in 
+HGC4oldRVersion branch.
+
+```{r Github install, eval = FALSE}
+if(!require(devtools))
+    install.packages("devtools")
+devtools::install_github("XuegongLab/HGC", ref = "HGC4oldRVersion")
+```
+
+For the users just interested in the core hierarchical clustering functions, 
+they could reference the HGC_core branch.
+
+```{r Github install, eval = FALSE}
+if(!require(devtools))
+    install.packages("devtools")
+devtools::install_github("XuegongLab/HGC", ref = "HGC_core")
 ```
 
 ## Quick Start
@@ -66,13 +97,14 @@ Pollen.SNN <- SNN.Construction(mat = Pollen.PCs, k = 25, threshold = 0.15)
 Pollen.ClusteringTree <- HGC.dendrogram(G = Pollen.SNN)
 ```
 
-The user could also give `HGC.dendrogram` an adjacency matrix directly, for instance, to read a matrix from `igraph` object and use it to run `HGC`.
+The user could also give `HGC.dendrogram` an adjacency matrix directly, please 
+reference to check the accepted data structures in the function documentation.  
+For instance, read a matrix from `igraph` object and use it to run `HGC`.
 
 ```{r}
 require(igraph)
 g <- sample_gnp(10, 2/10)
-G <- as_adjacency_matrix(g, sparse = TRUE)
-G.ClusteringTree <- HGC.dendrogram(G = G)
+G.ClusteringTree <- HGC.dendrogram(G = g)
 ```
 
 The output of `HGC` is a standard tree following the data structure `hclust()` 
@@ -119,6 +151,19 @@ different levels of the dendrogram with the two known labels.
 ```{r}
 ARI.mat <- HGC.PlotARIs(tree = Pollen.ClusteringTree,
                         labels = Pollen.labels)
+```
+
+### Heatmap with the HGC tree
+
+With the help of `pheatmap` package, we can combine the 
+`HGC` clustering tree with the heatmap of gene expression 
+data or low-dimensional data.
+
+```{r}
+# Input the clustering tree to pheatmap function
+require(pheatmap)
+pheatmap(mat = Pollen.PCs, cluster_rows = Pollen.ClusteringTree, 
+        cluster_cols = FALSE, show_rownames = FALSE)
 ```
 
 ## Time complexity analysis of HGC

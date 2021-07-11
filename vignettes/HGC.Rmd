@@ -279,6 +279,20 @@ HGC.PlotDendrogram(tree = Pollen.ClusteringTree,
                     labels = Pollen.labels)
 ```
 
+With the help of `pheatmap` package, we can combine the 
+`HGC` clustering tree with the heatmap of gene expression 
+data or low-dimensional data.
+
+```{r}
+# Input the clustering tree to pheatmap function
+# key paras: cluster_rows, cluster_cols
+library(pheatmap)
+pheatmap(mat = Pollen.PCs, 
+        cluster_rows = Pollen.ClusteringTree, 
+        cluster_cols = FALSE,
+        show_rownames = FALSE)
+```
+
 ## Evaluation of the clustering results
 
 For datasets with known labels, the clustering results of `HGC` can be 
